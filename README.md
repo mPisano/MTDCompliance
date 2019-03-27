@@ -12,6 +12,7 @@ Please note that there are 2 releases of the dashboards:
 - Release 2 (2018R2) for version 2018R2, 2019R1
 
 Please take an appropriate release accordingly to your version number.
+Each release contains project package and documentation in PDF file.
 
 To publish customization do following:
 
@@ -26,11 +27,11 @@ Option 1: For Usage
 Option 2: For Changes
 1) Download or Fork project from GitHub to local folder on your computer.
 2) Open Acumatica go to Customization Project (SM204505) screen
-3) Create new Project with name FinancialDashboards
+3) Create new Project with name HmrcVat
 4) Open customization project created
 5) On the customization project browser click "Source Control -> Open Project from Folder..."
-6) Choose "<local project folder>/CustomizationProject" where you have downloaded sources
-7) Make sure that Generic Inquires, Dashboards and Shared Filters appeared
+6) Choose "<local project folder>/HmrcVat" where you have downloaded sources
+7) Make sure that DLL and screen are populated
 8) Click "Publish -> Publish Customization Project (Ctrl+Space)"
 
 Read more about customization functionality here: https://portal.acumatica.com/downloads/mtd/
