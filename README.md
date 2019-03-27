@@ -1,6 +1,6 @@
 # MTD Compliance
 Making Tax Digital (MTD) is a UK government initiative that requires most UK taxpayers to send HM Revenue and Customs (HRMC) summaries of their income and expenditure at least four times a year. 
-Additional information is available from the HM Revenue and Customs website.
+Additional information is available from the HM Revenue and Customs website: https://www.gov.uk/government/publications/making-tax-digital/overview-of-making-tax-digital
 
 Publication of this customization allows you to create the digital file and submit it in the required format.
 Acumatica provides the customizations below so customers can create the digital file and submit it in the required format.
@@ -31,3 +31,5 @@ Option 2: For Changes
 6) Choose "<local project folder>/CustomizationProject" where you have downloaded sources
 7) Make sure that Generic Inquires, Dashboards and Shared Filters appeared
 8) Click "Publish -> Publish Customization Project (Ctrl+Space)"
+
+Read more about customization functionality here: https://portal.acumatica.com/downloads/mtd/

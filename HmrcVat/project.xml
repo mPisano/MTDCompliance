@@ -1,0 +1,73 @@
+<Customization level="0" description="" product-version="18.114">
+    <Page path="~/pages/sm/sm301000.aspx" ControlId="1" pageSource="vVbbbuM2EH1Ogf4DwSaA/VAp2b5lraBb22kMrLNB5FyAojBocWyzS5FaivJli+y371CX2HLkxGiL8sUyOZczM5wz7Jz8Sm7YDMhHpmYZfgS0+xMlQ5ZaMO7gUkjc++ZvdlL/Upv4XsDSi/NNSj5kVvcXoOyDMJAlAbUmA0rumRScWbiFLxmkNqBTJlPc72pe2g2Hv5yenZ6eeixNVl6UUjJQczDCpgF1vsaVACUjYZ3GnbLug+eoKTm5+PGHDsZQwButEyD3wtiMyRtm528Cd+poAL2fd7WyGAEZ9AIa4feZw5lv3UgWwZWWHIw7TOa9kJLbTDGMKASzQENohuDqpJERiSUWcWASYGX9v9iCFbuVkFvTTEVWaEUMSM14GBkA1WqTvzcibi2YITwlARmPk9U4iltLobhetr0p/vaYZaHOTASt9vu6npiSFk/bqOvBCqLMQpdJOWHRZ9z2IqYikF0dx0zxaxbDtvrT5vO4VcF8iey4xXWUxZiddv3ALc8A4+tXtLfji+bMYoTHHiZdQa6A+lMD6fwqm7xvVnRKXiQF+q+EixyipWe3LElG+rY4HfC9ICogKD7gDkmL/iH4cTAG/iFJpIiYszbojV09/6Rtb8Hki4zvZr80FgRkB8V+Nbfq12GPj6fm7VoG59nESy0ztvWKR49rBQeUqVrF7XNuUi3Bk3rWoptSkY17krsGTl9L01PTYW3z+U/HL1oIO+iok6zObx43lz9vWI7MYYqOTIuORBpIxcQxxijnIkcN7q4jrzx6n5Cw5t3i+mzVeMiEspTcGBEzs3ZEEdCtY/QRZmkCit8pVyahZgG9zCnNAcuBVn1Wdld6UQ+xBB/uiJECWShmaqAoIf6WWsdvsHnU8XfS4HjQ3+Kxiz209m4/rV3uY7XcVcWduaUp/nmR8Q2YqiShXbsKfP0ZLw6szsmZI/IHwR0z4/dJoTOEeAJmN9UjNhk4rVwyT/BRZwRxInGg5P/Km/CRrXVmbzMJu3hCdwlv9bK6Ai5uo2UoviKmxyElvxudJV2WOI819xTH4QRkWkINh6WxrpZZrEp7fmNtQ5DYA9rkadphkMaMXQqQvObdCY6Qa5pPXmTZ5aKhva4zKZ2VgHau+w8XqChSTN56iMMXI8CTYm6X1FQGtRuTXwuq+TYbnfT0UpURu0Z7LdD8vNlNZanRjUPc58K+TKxrngNTW4juvEuKjJQPjz3QKu+HQCuI5fVyb2T+FzAh4EixbwOq5BzVCNud46MQ0qp//muk+zv3rU5F9kawZU3JSH+Gw1q2GeQGxyEJzWdH7nI8/g2YcXj3p7VJ+t/lsWj25ykIIxHDHnh3NuqvEnyS80/qUJB1naICw3+EeRtcQd9+jb87jn2cg7zcOHrdDHjInxiU9BXD4c2rqzcU6grEbI7437kZ4m/NwGowNUzA7w==">
+        <PXFormView ID="form" ParentId="phF_form" TypeFullName="PX.Web.UI.PXFormView">
+            <Children Key="Template">
+                <AddItem>
+                    <PXTextEdit TypeFullName="PX.Web.UI.PXTextEdit">
+                        <Prop Key="Virtual:ApplyStylesheetSkin" />
+                        <Prop Key="ID" Value="edServerUrl" />
+                        <Prop Key="DataField" Value="Applications.UsrServerUrl" />
+                    </PXTextEdit>
+                </AddItem>
+                <PXTextEdit DataField="ClientID" OriginalIndex="4" />
+            </Children>
+        </PXFormView>
+    </Page>
+    <File AppRelativePath="Bin\PX.HMRC.dll" />
+    <File AppRelativePath="Pages\TX\TX502020.aspx" />
+    <File AppRelativePath="Pages\TX\TX502020.aspx.cs" />
+    <Table TableName="OAuthApplication">
+        <Column TableName="OAuthApplication" ColumnName="UsrServerUrl" ColumnType="string" AllowNull="True" MaxLength="128" DecimalPrecision="2" DecimalLength="128" IsNewColumn="True" IsUnicode="True" />
+    </Table>
+    <DAC type="PX.OAuthClient.DAC.OAuthApplication">
+        <Field FieldName="UsrServerUrl" TypeName="string" MapDbTable="OAuthApplication" TextAttributes="#CDATA" StorageName="AddColumn">
+            <CDATA name="TextAttributes"><![CDATA[[PXDBString(128)]
+[PXUIField(DisplayName="Server Url")]]]></CDATA>
+        </Field>
+    </DAC>
+    <SiteMapNode>
+        <data-set>
+            <relations format-version="3" relations-version="20160101" main-table="SiteMap">
+                <link from="MUIScreen (NodeID)" to="SiteMap (NodeID)" />
+                <link from="MUIWorkspace (WorkspaceID)" to="MUIScreen (WorkspaceID)" type="FromMaster" linkname="workspaceToScreen" split-location="yes" updateable="True" />
+                <link from="MUISubcategory (SubcategoryID)" to="MUIScreen (SubcategoryID)" type="FromMaster" updateable="True" />
+                <link from="MUITile (ScreenID)" to="SiteMap (ScreenID)" />
+                <link from="MUIWorkspace (WorkspaceID)" to="MUITile (WorkspaceID)" type="FromMaster" linkname="workspaceToTile" split-location="yes" updateable="True" />
+                <link from="MUIArea (AreaID)" to="MUIWorkspace (AreaID)" type="FromMaster" updateable="True" />
+                <link from="MUIPinnedScreen (NodeID, WorkspaceID)" to="MUIScreen (NodeID, WorkspaceID)" type="WeakIfEmpty" isEmpty="Username" />
+                <link from="MUIFavoriteWorkspace (WorkspaceID)" to="MUIWorkspace (WorkspaceID)" type="WeakIfEmpty" isEmpty="Username" />
+            </relations>
+            <layout>
+                <table name="SiteMap">
+                    <table name="MUIScreen" uplink="(NodeID) = (NodeID)">
+                        <table name="MUIPinnedScreen" uplink="(NodeID, WorkspaceID) = (NodeID, WorkspaceID)" />
+                    </table>
+                    <table name="MUITile" uplink="(ScreenID) = (ScreenID)" />
+                </table>
+                <table name="MUIWorkspace">
+                    <table name="MUIFavoriteWorkspace" uplink="(WorkspaceID) = (WorkspaceID)" />
+                </table>
+                <table name="MUISubcategory" />
+                <table name="MUIArea" />
+            </layout>
+            <data>
+                <SiteMap>
+                    <row Position="2" Title="Submit VAT Return" Url="~/Pages/TX/TX502020.aspx" Expanded="0" IsFolder="0" ScreenID="TX502020" NodeID="6cb7d070-5249-42a2-913f-2d0165b3adbc" ParentID="e34062ff-1105-4fe9-97a9-6cafc57dc17a">
+                        <MUIScreen IsPortal="0" WorkspaceID="3ca80fc2-2fa4-485a-8672-c8832daa2acc" Order="20.625" SubcategoryID="32130442-2305-4394-9389-cf915b191d2a">
+                            <MUIPinnedScreen IsPortal="0" Username="" IsPinned="1" />
+                        </MUIScreen>
+                    </row>
+                </SiteMap>
+                <MUIWorkspace>
+                    <row IsPortal="0" WorkspaceID="3ca80fc2-2fa4-485a-8672-c8832daa2acc" Order="145.25" Title="Taxes" Icon="taxes" AreaID="338edf81-5456-4735-8601-b213458e93fe" ScreenID="WSTX0000" IsSystem="0" />
+                </MUIWorkspace>
+                <MUISubcategory>
+                    <row IsPortal="0" SubcategoryID="32130442-2305-4394-9389-cf915b191d2a" Order="820" Name="Processes" Icon="" IsSystem="0" />
+                </MUISubcategory>
+                <MUIArea>
+                    <row IsPortal="0" AreaID="338edf81-5456-4735-8601-b213458e93fe" Order="10" Name="Financials" />
+                </MUIArea>
+            </data>
+        </data-set>
+    </SiteMapNode>
+</Customization>
