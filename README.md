@@ -9,7 +9,8 @@ This customization contains a Customization Project and a Customization Code (li
 Supported Versions: Acumatica 2018R1, Acumatica 2018R2.
 Please note that there are 2 releases of the dashboards:
 - Release 1 (2018R1) for version 2018R1
-- Release 2 (2018R2) for version 2018R2
+- Release 2 (2018R2) for version 2018R2, 2019R1
+
 Please take an appropriate release accordingly to your version number.
 
 To publish customization do following:
