@@ -53,11 +53,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\ObligationSelectorAttribute.cs" />
-    <Compile Include="DAC\HMRCBranchBAccount.cs" />
+    <Compile Include="DAC\BranchTaxInfo.cs" />
     <Compile Include="DAC\HMRCOAuthApplication.cs" />
     <Compile Include="DAC\Obligation.cs" />
     <Compile Include="DAC\ObligationStatus.cs" />
-    <Compile Include="DAC\HMRCOrganizationBAccount.cs" />
+    <Compile Include="DAC\OrganizationTaxInfo.cs" />
     <Compile Include="DAC\TaxHistoryReleased.cs" />
     <Compile Include="DAC\VATPeriodFilter.cs" />
     <Compile Include="DAC\VATRow.cs" />

@@ -7,9 +7,9 @@ namespace PX.HMRC.DAC
 {
 	[PXProjection(typeof(Select2<Organization,
 		InnerJoin<BAccountR, On<BAccountR.bAccountID, Equal<Organization.bAccountID>>>, Where<True, Equal<True>>>))]
-	[PXCacheName("HMRCOrganizationBAccount")]
-	[Serializable]
-	public partial class HMRCOrganizationBAccount : PX.Data.IBqlTable
+    [PXHidden]
+    [Serializable]
+	public partial class OrganizationTaxInfo : PX.Data.IBqlTable
 	{
 		#region BAccountID
 		public abstract class bAccountID : IBqlField { }

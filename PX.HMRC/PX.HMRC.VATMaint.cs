@@ -57,8 +57,8 @@ namespace PX.HMRC
         #region BQL Selectors 
         public PXSelect<TaxPeriod,
 					Where<TaxPeriod.organizationID, Equal<Current<VATPeriodFilter.organizationID>>,
-								And<TaxPeriod.vendorID, Equal<Current<VATPeriodFilter.vendorID>>,
-								And<TaxPeriod.taxPeriodID, Equal<Current<VATPeriodFilter.taxPeriodID>>>>>> Period;
+						And<TaxPeriod.vendorID, Equal<Current<VATPeriodFilter.vendorID>>,
+						And<TaxPeriod.taxPeriodID, Equal<Current<VATPeriodFilter.taxPeriodID>>>>>> Period;
 
 		public PXSelect<Vendor, Where<Vendor.bAccountID, Equal<Current<VATPeriodFilter.vendorID>>>> Vendor;
 		#endregion
@@ -103,7 +103,7 @@ namespace PX.HMRC
                 return Period_Details_Expanded.Select();
 			}
 		}
-
+        
 		#endregion
 
 		#region Private variables
@@ -153,8 +153,9 @@ namespace PX.HMRC
         [PXSelector(
             typeof(Search<TaxPeriod.taxPeriodID,
                 Where<TaxPeriod.vendorID, Equal<Current<TaxPeriodFilter.vendorID>>,
-                    And<TaxPeriod.organizationID, Equal<Current<TaxPeriodFilter.organizationID>>, 
-                    And<TaxPeriod.status,Equal<TaxPeriodStatus.closed>>>>>),
+                    And<TaxPeriod.organizationID, Equal<Current<TaxPeriodFilter.organizationID>>,
+                    And<TaxPeriod.status, Equal<TaxPeriodStatus.closed>>>>,
+                OrderBy<Desc<TaxPeriod.taxPeriodID>>>),
             typeof(TaxPeriod.taxPeriodID), typeof(TaxPeriod.startDateUI), typeof(TaxPeriod.endDateUI), typeof(TaxPeriod.status),
             SelectorMode = PXSelectorMode.NoAutocomplete,
             DirtyRead = true)]
@@ -284,7 +285,13 @@ namespace PX.HMRC
             }
             if (!sender.ObjectsEqual<VATPeriodFilter.endDate>(e.Row, e.OldRow))
             {
-                GetVATObligationsForYearProc(this, filter.EndDate??DateTime.UtcNow);
+                try
+                {
+                    GetVATObligationsForYearProc(this, filter.EndDate ?? DateTime.UtcNow);
+                }
+                catch (Exception)
+                {
+                }
             }
         }
         #endregion
@@ -449,15 +456,15 @@ namespace PX.HMRC
 				throw e;
 			}
 			graph.VATRows.Cache.Clear();
-			graph.VATRows.Insert(new VATRow() { TaxBoxNbr = "1", TaxBoxCode = "vatDueSales", Descr = "VAT due on sales and other outputs", Amt = vATreturn.vatDueSales });
-			graph.VATRows.Insert(new VATRow() { TaxBoxNbr = "2", TaxBoxCode = "vatDueAcquisitions", Descr = "VAT due on acquisitions from other EC Member States.", Amt = vATreturn.vatDueAcquisitions });
-			graph.VATRows.Insert(new VATRow() { TaxBoxNbr = "3", TaxBoxCode = "totalVatDue", Descr = "Total VAT due", Amt = vATreturn.totalVatDue });
-			graph.VATRows.Insert(new VATRow() { TaxBoxNbr = "4", TaxBoxCode = "vatReclaimedCurrPeriod", Descr = "VAT reclaimed on purchases and other inputs", Amt = vATreturn.vatReclaimedCurrPeriod });
-			graph.VATRows.Insert(new VATRow() { TaxBoxNbr = "5", TaxBoxCode = "netVatDue", Descr = "The difference between Box 3 and Box 4", Amt = vATreturn.netVatDue });
-			graph.VATRows.Insert(new VATRow() { TaxBoxNbr = "6", TaxBoxCode = "totalValueSalesExVAT", Descr = " Total value of sales and all other outputs excluding any VAT", Amt = vATreturn.totalValueSalesExVAT });
-			graph.VATRows.Insert(new VATRow() { TaxBoxNbr = "7", TaxBoxCode = "totalValuePurchasesExVAT", Descr = "Total value of purchases and all other inputs excluding any VAT", Amt = vATreturn.totalValuePurchasesExVAT });
-			graph.VATRows.Insert(new VATRow() { TaxBoxNbr = "8", TaxBoxCode = "totalValueGoodsSuppliedExVAT", Descr = "Total value of all supplies of goods and related costs, excluding any VAT, to other EC member states.", Amt = vATreturn.totalValueGoodsSuppliedExVAT });
-			graph.VATRows.Insert(new VATRow() { TaxBoxNbr = "9", TaxBoxCode = "totalAcquisitionsExVAT", Descr = "Total value of acquisitions of goods and related costs excluding any VAT, from other EC member states.", Amt = vATreturn.totalAcquisitionsExVAT });
+			graph.VATRows.Insert(new VATRow() { TaxBoxNbr = "1", TaxBoxCode = "vatDueSales", Descr = Messages.vatDueSales, Amt = vATreturn.vatDueSales });
+			graph.VATRows.Insert(new VATRow() { TaxBoxNbr = "2", TaxBoxCode = "vatDueAcquisitions", Descr = Messages.vatDueAcquisitions, Amt = vATreturn.vatDueAcquisitions });
+			graph.VATRows.Insert(new VATRow() { TaxBoxNbr = "3", TaxBoxCode = "totalVatDue", Descr = Messages.totalVatDue, Amt = vATreturn.totalVatDue });
+			graph.VATRows.Insert(new VATRow() { TaxBoxNbr = "4", TaxBoxCode = "vatReclaimedCurrPeriod", Descr = Messages.vatReclaimedCurrPeriod, Amt = vATreturn.vatReclaimedCurrPeriod });
+			graph.VATRows.Insert(new VATRow() { TaxBoxNbr = "5", TaxBoxCode = "netVatDue", Descr = Messages.netVatDue, Amt = vATreturn.netVatDue });
+			graph.VATRows.Insert(new VATRow() { TaxBoxNbr = "6", TaxBoxCode = "totalValueSalesExVAT", Descr = Messages.totalValueSalesExVAT, Amt = vATreturn.totalValueSalesExVAT });
+			graph.VATRows.Insert(new VATRow() { TaxBoxNbr = "7", TaxBoxCode = "totalValuePurchasesExVAT", Descr = Messages.totalValuePurchasesExVAT, Amt = vATreturn.totalValuePurchasesExVAT });
+			graph.VATRows.Insert(new VATRow() { TaxBoxNbr = "8", TaxBoxCode = "totalValueGoodsSuppliedExVAT", Descr = Messages.totalValueGoodsSuppliedExVAT, Amt = vATreturn.totalValueGoodsSuppliedExVAT });
+			graph.VATRows.Insert(new VATRow() { TaxBoxNbr = "9", TaxBoxCode = "totalAcquisitionsExVAT", Descr = Messages.totalAcquisitionsExVAT, Amt = vATreturn.totalAcquisitionsExVAT });
             graph.VATRows.Insert(new VATRow() { TaxBoxNbr = "Period", TaxBoxCode = "periodKey", Descr = vATreturn.periodKey, Amt = null });
         }
 
@@ -466,17 +473,17 @@ namespace PX.HMRC
             if (p.OrganizationID == null) return;
 
             string vrn;
-            HMRCOrganizationBAccount org =
-                PXSelect<HMRCOrganizationBAccount,
-                Where<HMRCOrganizationBAccount.organizationID, Equal<Required<HMRCOrganizationBAccount.organizationID>>>>
+            OrganizationTaxInfo org =
+                PXSelect<OrganizationTaxInfo,
+                Where<OrganizationTaxInfo.organizationID, Equal<Required<OrganizationTaxInfo.organizationID>>>>
                 .SelectSingleBound(this, null, p.OrganizationID).FirstOrDefault();
 
             vrn = org.TaxRegistrationID;
             if (org.FileTaxesByBranches == true && p.BranchID!=null)
             {
-                HMRCBranchBAccount branch =
-                    PXSelect<HMRCBranchBAccount,
-                    Where<HMRCBranchBAccount.branchID, Equal<Required<HMRCBranchBAccount.branchID>>>>
+                BranchTaxInfo branch =
+                    PXSelect<BranchTaxInfo,
+                    Where<BranchTaxInfo.branchID, Equal<Required<BranchTaxInfo.branchID>>>>
                     .SelectSingleBound(this, null, p.BranchID).FirstOrDefault();
 
                 vrn = branch.TaxRegistrationID;

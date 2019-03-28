@@ -3,6 +3,7 @@ using PX.OAuthClient.DAC;
 
 namespace PX.HMRC.DAC
 {
+    [PXHidden]
     public class HMRCOAuthApplication: OAuthApplication
     {
         #region OAuthApplication

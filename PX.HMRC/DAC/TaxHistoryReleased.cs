@@ -1,5 +1,6 @@
 ﻿using System;
 using PX.Data;
+using PX.Objects.GL;
 using PX.Objects.CM;
 using PX.Objects.TX;
 
@@ -7,17 +8,15 @@ namespace PX.HMRC.DAC
 {
     [System.SerializableAttribute()]
     [PXProjection(typeof(Select2<TaxHistory, 
-        InnerJoin<TaxTran, 
-            On <TaxHistory.branchID, Equal<TaxTran.branchID>, 
-                And<TaxHistory.vendorID, Equal<TaxTran.vendorID>, 
-                And<TaxHistory.accountID, Equal<TaxTran.accountID>, 
-                And<TaxHistory.subID, Equal<TaxTran.subID>,
-                And<TaxHistory.taxPeriodID, Equal<TaxTran.taxPeriodID>,
-                And<TaxHistory.taxID, Equal<TaxTran.taxID>,
-                And<TaxHistory.revisionID, Equal<TaxTran.revisionID>,
-                And<TaxTran.released, Equal<PX.Objects.CS.boolTrue>,
-                And<TaxTran.voided, Equal<PX.Objects.CS.boolFalse>
-                >>>>>>>>>>>))]
+        InnerJoin<Branch, 
+            On <Branch.branchID, Equal<TaxHistory.branchID>>,
+        InnerJoin<TaxPeriod,On<
+                TaxPeriod.vendorID, Equal<TaxHistory.vendorID>,
+                And<TaxPeriod.taxPeriodID, Equal<TaxHistory.taxPeriodID>, 
+                And<TaxPeriod.status, Equal<TaxPeriodStatus.closed>,
+                And<TaxPeriod.organizationID, Equal<Branch.organizationID>
+            >>>>>>>))]
+    [PXHidden]
     public partial class TaxHistoryReleased : PX.Data.IBqlTable
     {
         #region BranchID

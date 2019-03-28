@@ -6,15 +6,14 @@ using PX.HMRC.Attributes;
 namespace PX.HMRC.DAC
 {
 	[System.SerializableAttribute()]
-	public partial class VATPeriodFilter: PX.Objects.TX.TaxPeriodFilter
+    [PXHidden]
+    public partial class VATPeriodFilter: PX.Objects.TX.TaxPeriodFilter
 	{
         #region TaxPeriodFilter
         public new abstract class organizationID : PX.Data.IBqlField { }
         public new abstract class branchID : PX.Data.IBqlField { }
         public new abstract class vendorID : PX.Data.IBqlField { }
         public new abstract class taxPeriodID : PX.Data.IBqlField { }
-
-
 
         public new abstract class revisionId : PX.Data.IBqlField { }
         public new abstract class startDate : PX.Data.IBqlField { }

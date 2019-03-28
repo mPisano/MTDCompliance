@@ -28,9 +28,9 @@ namespace PX.HMRC.Exceptions
 			{
 				switch (code)
 				{
-					case IMPOSSIBLE_TO_REFRESH_TOKEN: message = "Impossible to refresh a token"; break;
-					case REFRESH_TOKEN_IS_INVALID: message = "Refresh Token is invalid"; break;
-					case REFRESH_TOKEN_IS_MISSING: message = "Refresh Token is missing"; break;
+					case IMPOSSIBLE_TO_REFRESH_TOKEN: message = Messages.ImpossibleToRefreshToken; break;
+					case REFRESH_TOKEN_IS_INVALID: message = Messages.RefreshTokenIsInvalid; break;
+					case REFRESH_TOKEN_IS_MISSING: message = Messages.RefreshTokenIsMissing; break;
 				}
 			}
 			return message;

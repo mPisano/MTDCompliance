@@ -4,6 +4,7 @@ using PX.Data;
 namespace PX.HMRC.DAC
 {
 	[System.SerializableAttribute()]
+    [PXHidden]
     public class Obligation : IBqlTable
 	{
         #region PeriodKey

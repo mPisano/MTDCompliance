@@ -4,7 +4,8 @@ using PX.Data;
 namespace PX.HMRC.DAC
 {
 	[System.SerializableAttribute()]
-	public class VATRow : IBqlTable
+    [PXHidden]
+    public class VATRow : IBqlTable
 	{
 		#region taxBoxNbr
 		public abstract class taxBoxNbr : IBqlField { }

@@ -39,7 +39,8 @@ namespace PX.HMRC
 
 		private UpdateOAuthTokenDelegate updateOAuthToken;
 
-		public VATApi(string UrlSite, OAuthApplication Application, OAuthToken Token, string VRN, UpdateOAuthTokenDelegate UpdateOAuthToken=null) {
+		public VATApi(string UrlSite, OAuthApplication Application, OAuthToken Token, string VRN, UpdateOAuthTokenDelegate UpdateOAuthToken=null)
+        {
 			application = Application;
 			token = Token;
             urlSite = UrlSite;
@@ -64,7 +65,8 @@ namespace PX.HMRC
 		/// <summary>
 		/// Refresh Access Token if it is need
 		/// </summary>
-		public void RefreshAccessToken() {
+		public void RefreshAccessToken()
+        {
             if (token == null)
             {
                 throw new Exceptions.VATAPIInvalidToken(Model.error.IMPOSSIBLE_TO_REFRESH_TOKEN);
@@ -72,9 +74,10 @@ namespace PX.HMRC
 			if (token.UtcExpiredOn == null || token.UtcExpiredOn?.AddMinutes(-15) < token.UtcNow)
 			{
 				ApplicationProcessor.RefreshAccessToken(token, application);
-				updateOAuthToken(token);
+                updateOAuthToken(token);
 			}
 		}
+
         /// <summary>
         /// Сheck Api Response
         /// </summary>
@@ -126,7 +129,8 @@ namespace PX.HMRC
         /// Retrieve VAT obligations
         /// </summary>
         /// <returns></returns>
-        public obligationResponse Obligations(obligationsRequest request, string testScenario=null) {
+        public obligationResponse Obligations(obligationsRequest request, string testScenario=null)
+        {
 			RefreshAccessToken();
             string url = urlSite + _urlObligations.Replace("{vrn}", vrn) + "?from=" + request.from?.ToString("yyyy-MM-dd") + "&to=" + request.to?.ToString("yyyy-MM-dd");
 			HttpRequestMessage httpRequest = new HttpRequestMessage(HttpMethod.Get, url);
@@ -139,13 +143,14 @@ namespace PX.HMRC
 			}
 
 			obligationResponse obligationResponse = null;
-			using (var httpClient = new HttpClient()) {
-				HttpResponseMessage response = httpClient.SendAsync(httpRequest).Result;
-				checkApiResponse(response, VATApiType.RetrieveVATobligations);
+            using (var httpClient = new HttpClient())
+            {
+                HttpResponseMessage response = httpClient.SendAsync(httpRequest).Result;
+                checkApiResponse(response, VATApiType.RetrieveVATobligations);
 
-				var content = response.Content.ReadAsStringAsync();
-				obligationResponse = JsonConvert.DeserializeObject<obligationResponse>(content.Result);
-			}
+                var content = response.Content.ReadAsStringAsync();
+                obligationResponse = JsonConvert.DeserializeObject<obligationResponse>(content.Result);
+            }
 
 			return obligationResponse;
 		}
