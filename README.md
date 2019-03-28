@@ -1,10 +1,18 @@
-# MTD Compliance
+[![Project Status](http://opensource.box.com/badges/active.svg)](http://opensource.box.com/badges)
+
+MTD Compliance
+==================================
+
 Making Tax Digital (MTD) is a UK government initiative that requires most UK taxpayers to send HM Revenue and Customs (HRMC) summaries of their income and expenditure at least four times a year. 
 Additional information is available from the HM Revenue and Customs website: https://www.gov.uk/government/publications/making-tax-digital/overview-of-making-tax-digital
 
 Publication of this customization allows you to create the digital file and submit it in the required format.
 Acumatica provides the customizations below so customers can create the digital file and submit it in the required format.
 This customization contains a Customization Project and a Customization Code (library).
+
+Read more about customization functionality here: https://portal.acumatica.com/downloads/mtd/
+
+### Versions
 
 Supported Versions: Acumatica 2018R1, Acumatica 2018R2.
 Please note that there are 2 releases of the dashboards:
@@ -13,6 +21,8 @@ Please note that there are 2 releases of the dashboards:
 
 Please take an appropriate release accordingly to your version number.
 Each release contains project package and documentation in PDF file.
+
+### Installations
 
 To publish customization do following:
 
@@ -34,4 +44,14 @@ Option 2: For Changes
 7) Make sure that DLL and screen are populated
 8) Click "Publish -> Publish Customization Project (Ctrl+Space)"
 
-Read more about customization functionality here: https://portal.acumatica.com/downloads/mtd/
+### Known Issues
+
+None at the moment
+
+-----------
+
+### Copyright and License
+
+Copyright © `2019` `Acumatica`
+
+This component is licensed under the MIT License, a copy of which is available online [here](LICENSE.md)
