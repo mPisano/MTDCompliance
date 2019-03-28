@@ -54,4 +54,4 @@ None at the moment
 
 Copyright © `2019` `Acumatica`
 
-This component is licensed under the MIT License, a copy of which is available online [here](LICENSE.md)
+This component is licensed under the MIT License, a copy of which is available online [here](LICENSE)
