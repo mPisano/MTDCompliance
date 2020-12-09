@@ -1,5 +1,6 @@
 ﻿namespace PX.HMRC.Model
 {
+	[System.SerializableAttribute()]
 	public class period
 	{
 		/// <summary>

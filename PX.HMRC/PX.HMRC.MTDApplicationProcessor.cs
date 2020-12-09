@@ -7,124 +7,174 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using IdentityModel;
 using IdentityModel.Client;
-using PX.Data;
-using PX.OAuthClient.DAC;
-using PX.OAuthClient.Handlers;
-using PX.OAuthClient.Processors;
+using PX.HMRC.Browser;
+
 
 namespace PX.HMRC
 {
-	public class MTDApplicationProcessor : IExternalApplicationProcessor
-	{
-		private const string _isSignedAcceptHeader = "application/vnd.hmrc.1.0+json";
-		private const string _scope = "read:vat+write:vat";
-		private string _urlSite = "https://test-api.service.hmrc.gov.uk";
-		private const string _authorizationUrl = "/oauth/authorize";
-		private const string _tokenUrl = "/oauth/token";
-		private const string _isSignedUrl = "/hello/application";
+    public class MTDApplicationProcessor
+    {
+        private const string _isSignedAcceptHeader = "application/vnd.hmrc.1.0+json";
+        private const string _scope = "read:vat+write:vat";
 
-		private string urlSite= "https://test-api.service.hmrc.gov.uk";
-
-		private string authorizationUrl = "https://test-api.service.hmrc.gov.uk/oauth/authorize";
-		private string tokenUrl			= "https://test-api.service.hmrc.gov.uk/oauth/token";
-		private string isSignedUrl		= "https://test-api.service.hmrc.gov.uk/hello/application";
-
-		public string TypeName => "HMRC MTD";
-		public string TypeCode => "RCMTD";
-
-		public bool HasRefreshToken => true;
-
-		public string SignInFailedMessage => throw new NotImplementedException();
-
-		public MTDApplicationProcessor(string UrlSite=null) {
-			urlSite = String.IsNullOrEmpty(UrlSite) ? _urlSite : UrlSite;
-
-			authorizationUrl = urlSite + _authorizationUrl;
-			tokenUrl = urlSite + _tokenUrl;
-			isSignedUrl = urlSite + _isSignedUrl;
-		}
-
-		public void SignIn(OAuthApplication oAuthApplication, ref OAuthToken token)
-		{
-			var request = new AuthorizeRequest(authorizationUrl);
-			var url = request.CreateAuthorizeUrl(
-				clientId: oAuthApplication.ClientID,
-				responseType: OidcConstants.ResponseTypes.Code,
-				scope: _scope,
-				state: oAuthApplication.ApplicationID.ToString(),
-				redirectUri: AuthenticationHandler.ReturnUrl);
-
-			throw new PXRedirectToUrlException(url, PXBaseRedirectException.WindowMode.InlineWindow, "Authenticate");
-		}
-
-		public void ProcessAuthorizationCode(string code, OAuthApplication application, OAuthToken token)
-		{
-			var tokenClient = new TokenClient(tokenUrl, application.ClientID, application.ClientSecret, AuthenticationStyle.PostValues);
-			var tokenResponse = tokenClient.RequestAuthorizationCodeAsync(code, AuthenticationHandler.ReturnUrl).Result;
-
-			FillTokenFromTokenResponse(tokenResponse, token);
-		}
-
-		private static void FillTokenFromTokenResponse(TokenResponse tokenResponse, OAuthToken token)
-		{
-			token.AccessToken = tokenResponse.AccessToken;
-			token.RefreshToken = tokenResponse.RefreshToken;
-			token.UtcExpiredOn = DateTime.UtcNow.AddSeconds(tokenResponse.ExpiresIn);
-			token.Bearer = tokenResponse.TokenType;
-			
-		}
-
-		public void RefreshAccessToken(OAuthToken token, OAuthApplication oAuthApplication)
-		{
-			var refreshToken = token.RefreshToken;
-			var client = new TokenClient(tokenUrl, oAuthApplication.ClientID, oAuthApplication.ClientSecret, AuthenticationStyle.PostValues);
-			var tokenResponse = client.RequestRefreshTokenAsync(refreshToken).Result;
-			if (!tokenResponse.IsError)
-			{
-				FillTokenFromTokenResponse(tokenResponse, token);
-				return;
-			}
-			string error = tokenResponse.Error;
-			string error_description = "";
-			try{
-				error_description = (((Newtonsoft.Json.Linq.JValue)tokenResponse.Json["error_description"]).Value).ToString();
-			}catch (Exception){}
-
-			Exceptions.VATAPIInvalidToken e = new Exceptions.VATAPIInvalidToken(Model.error.IMPOSSIBLE_TO_REFRESH_TOKEN);
-			e.Data.Add("AccessToken", token.AccessToken);
-			e.Data.Add("RefreshToken", token.RefreshToken);
-			e.Data.Add("Raw", tokenResponse.Raw);
-
-			throw e;
-		}
-
-		public Task<IEnumerable<Resource>> GetResources(OAuthToken token, OAuthApplication application)
-		{
-			return Task.FromResult(Enumerable.Empty<Resource>());
-		}
-
-		public bool IsSignedIn(OAuthApplication application, OAuthToken token)
-		{
-			if (application == null || token == null)
-			{
-				return false;
-			}
-
-			HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, isSignedUrl);
-			request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(_isSignedAcceptHeader));
-			request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
-
-			var httpClient = new HttpClient();
-			var response = httpClient.SendAsync(request).Result;
-
-			return response?.StatusCode == HttpStatusCode.OK;
-		}
-
-		public string ResourceHtml(OAuthToken token, OAuthResource resource, OAuthApplication application)
-		{
-			return string.Empty;
-		}
-	}
+        private const string _authorizationUrl = "/oauth/authorize";
+        private const string _tokenUrl = "/oauth/token";
 
 
+        private string authorizationUrl;
+        private string tokenUrl;
+        const string SuccessTitle = "Success code";
+        public bool HasRefreshToken => true;
+
+        public string SignInFailedMessage => throw new NotImplementedException();
+
+        public MTDApplicationProcessor(string urlSite)
+        {
+            authorizationUrl = urlSite + _authorizationUrl;
+            tokenUrl = urlSite + _tokenUrl;
+        }
+
+        /// <summary>
+        /// Uses the Embedded Broswer for login and auto process the AccessCode 
+        /// </summary
+        public async Task<BrowserResultType> SignIn(OAuthSettings oAuthApplication, OAuthToken token)
+        {
+            var request = new RequestUrl(authorizationUrl);
+            var url = request.CreateAuthorizeUrl(
+                clientId: oAuthApplication.ClientID,
+                responseType: OidcConstants.ResponseTypes.Code,
+                scope: _scope,
+                state: oAuthApplication.ApplicationID.ToString(),
+                redirectUri: oAuthApplication.ReturnUrl);
+
+            var Browser = new HMRC.Browser.WinFormsBroswer();
+            var browserOptions = new BrowserOptions(url, "", SuccessTitle);
+
+            browserOptions.DisplayMode = DisplayMode.Visible;
+
+            var browserResult = await Browser.InvokeAsync(browserOptions);
+            if (browserResult.ResultType == BrowserResultType.Success)
+            {
+                var r = browserResult.Response.Split('&');
+                Dictionary<String, String> p = new Dictionary<string, string>();
+                foreach (var item in r)
+                {
+                    var r1 = item.Split('=');
+                    p.Add(r1[0], r1[1]);
+                }
+                string code = p[SuccessTitle];
+                ProcessAuthorizationCode(code, oAuthApplication, token);
+            }
+            return browserResult.ResultType;
+        }
+
+        /// <summary>
+        /// Starts the default browser to obtain the AccessCode to be used with ProcessAuthorizationCode()
+        /// </summary>
+        public void SignIn(OAuthSettings oAuthApplication)
+        {
+            var request = new RequestUrl(authorizationUrl);
+            var url = GetSigninURL(oAuthApplication);
+            System.Diagnostics.Process.Start(url);
+        }
+
+        /// <summary>
+        /// Created a Login URL incase you want to Call a different Browser from SignIn()
+        /// </summary>
+        public string GetSigninURL(OAuthSettings oAuthApplication)
+        {
+            var request = new RequestUrl(authorizationUrl);
+            var url = request.CreateAuthorizeUrl(
+                clientId: oAuthApplication.ClientID,
+                responseType: OidcConstants.ResponseTypes.Code,
+                scope: _scope,
+                state: oAuthApplication.ApplicationID.ToString(),
+                redirectUri: oAuthApplication.ReturnUrl);
+            //Wish I could send this in!
+            //UserName = oAuthApplication.UserID,
+            //Password = oAuthApplication.Password,
+            return url;
+        }
+
+
+        public void SignOut(OAuthSettings application, OAuthToken token)
+        {
+            //Nothing to do at API Level
+        }
+
+        /// <summary>
+        /// Process Authorization Code from External Browser and request Token
+        /// </summary>
+        public bool ProcessAuthorizationCode(string code, OAuthSettings application, OAuthToken token)
+        {
+            AuthorizationCodeTokenRequest request = new AuthorizationCodeTokenRequest()
+            {
+                ClientId = application.ClientID,
+                ClientSecret = application.ClientSecret,
+                Code = code,
+                RequestUri = new Uri(tokenUrl),
+                RedirectUri = application.ReturnUrl
+            };
+
+            try
+            {
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    Task<TokenResponse> T = Task.Run(() => httpClient.RequestAuthorizationCodeTokenAsync(request));
+                    TokenResponse tokenResponse = T.Result;
+                    FillTokenFromTokenResponse(tokenResponse, token);
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private static void FillTokenFromTokenResponse(TokenResponse tokenResponse, OAuthToken token)
+        {
+            token.AccessToken = tokenResponse.AccessToken;
+            token.RefreshToken = tokenResponse.RefreshToken;
+            token.UtcExpiredOn = DateTime.UtcNow.AddSeconds(tokenResponse.ExpiresIn);
+            token.Bearer = tokenResponse.TokenType;
+        }
+
+        public void RefreshAccessToken(OAuthSettings oAuthApplication, OAuthToken token)
+        {
+            if (token.RefreshToken == null)
+                throw new Exceptions.VATAPIInvalidToken(Model.error.REFRESH_TOKEN_IS_MISSING);
+            var request = new RefreshTokenRequest()
+            {
+                ClientId = oAuthApplication.ClientID,
+                ClientSecret = oAuthApplication.ClientSecret,
+                RefreshToken = token.RefreshToken,
+                RequestUri = new Uri(tokenUrl)
+            };
+
+            using (HttpClient httpClient = new HttpClient())
+            {
+                Task<TokenResponse> T = Task.Run(() => httpClient.RequestRefreshTokenAsync(request));
+                TokenResponse tokenResponse = T.Result;
+                if (!tokenResponse.IsError)
+                {
+                    FillTokenFromTokenResponse(tokenResponse, token);
+                    return;
+                }
+                string error = tokenResponse.Error;
+                string error_description = "";
+                try
+                {
+                    error_description = (((Newtonsoft.Json.Linq.JValue)tokenResponse.Json["error_description"]).Value).ToString();
+                }
+                catch (Exception) { }
+
+                Exceptions.VATAPIInvalidToken e = new Exceptions.VATAPIInvalidToken(Model.error.IMPOSSIBLE_TO_REFRESH_TOKEN);
+                e.Data.Add("AccessToken", token.AccessToken);
+                e.Data.Add("RefreshToken", token.RefreshToken);
+                e.Data.Add("Raw", tokenResponse.Raw);
+                throw e;
+            }
+        }
+    }
 }

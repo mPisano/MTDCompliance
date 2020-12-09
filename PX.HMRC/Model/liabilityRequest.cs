@@ -1,4 +1,6 @@
-﻿namespace PX.HMRC.Model
+﻿using System;
+
+namespace PX.HMRC.Model
 {
 	[System.SerializableAttribute()]
 	public class liabilityRequest : requestAuthorisation
@@ -7,12 +9,12 @@
 		/// Liabilities to return from date
 		/// For example: 2017-01-25
 		/// </summary>
-		public string from { get; set; }
+		public DateTime? from { get; set; }
 
 		/// <summary>
 		/// Liabilities to return up to date
 		/// For example: 2017-01-25
 		/// </summary>
-		public string to { get; set; }
+		public DateTime? to { get; set; }
 	}
 }

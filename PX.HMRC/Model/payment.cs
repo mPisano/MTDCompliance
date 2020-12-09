@@ -2,6 +2,7 @@
 
 namespace PX.HMRC.Model
 {
+	[System.SerializableAttribute()]
 	public class payment
 	{
 		/// <summary>
@@ -15,6 +16,6 @@ namespace PX.HMRC.Model
 		/// Date in the format YYYY-MM-DD
 		/// For example: 2017-01-25
 		/// </summary>
-		public DateTime? received { get; set; }
+		public string received { get; set; }
 	}
 }

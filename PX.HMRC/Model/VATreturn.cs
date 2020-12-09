@@ -53,28 +53,28 @@
 		/// This corresponds to box 6 on the VAT Return form. 
 		/// The value must be between -9999999999999 and 9999999999999.
 		/// </summary>
-		public decimal totalValueSalesExVAT { get; set; }
+		public int totalValueSalesExVAT { get; set; }
 
 		/// <summary>
 		/// Total value of purchases and all other inputs excluding any VAT (including exempt purchases). 
 		/// This corresponds to box 7 on the VAT Return form. 
 		/// The value must be between -9999999999999 and 9999999999999.
 		/// </summary>
-		public decimal totalValuePurchasesExVAT { get; set; }
+		public int totalValuePurchasesExVAT { get; set; }
 
 		/// <summary>
 		/// Total value of all supplies of goods and related costs, excluding any VAT, to other EC member states. 
 		/// This corresponds to box 8 on the VAT Return form. 
 		/// The value must be between -9999999999999 and 9999999999999.
 		/// </summary>
-		public decimal totalValueGoodsSuppliedExVAT { get; set; }
+		public int totalValueGoodsSuppliedExVAT { get; set; }
 
 		/// <summary>
 		/// Total value of acquisitions of goods and related costs excluding any VAT, from other EC member states. 
 		/// This corresponds to box 9 on the VAT Return form. 
 		/// The value must be between -9999999999999 and 9999999999999.
 		/// </summary>
-		public decimal totalAcquisitionsExVAT { get; set; }
+		public int totalAcquisitionsExVAT { get; set; }
 
 		/// <summary>
 		/// Declaration that the user has finalised their VAT return.

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PX.HMRC</RootNamespace>
     <AssemblyName>PX.HMRC</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -18,12 +18,14 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Pure\Site\Bin\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>1584,1572,1711,1570,1574,1587,1591,1573,1712</NoWarn>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,18 +34,41 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IdentityModel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\IdentityModel.1.9.2\lib\net45\IdentityModel.dll</HintPath>
+    <Reference Include="IdentityModel, Version=4.1.1.0, Culture=neutral, PublicKeyToken=e7877f4675df049f, processorArchitecture=MSIL">
+      <HintPath>..\packages\IdentityModel.4.1.1\lib\net461\IdentityModel.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.7.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,21 +77,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\ObligationSelectorAttribute.cs" />
-    <Compile Include="DAC\BranchTaxInfo.cs" />
-    <Compile Include="DAC\HMRCOAuthApplication.cs" />
+    <Compile Include="Browser\BrowserOptions.cs" />
+    <Compile Include="Browser\BrowserResult.cs" />
+    <Compile Include="Browser\BrowserResultType.cs" />
+    <Compile Include="Browser\DisplayMode.cs" />
+    <Compile Include="Browser\ExtendedBrowser.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Browser\IBrowser.cs" />
+    <Compile Include="Browser\WinFormsBroswer.cs" />
+    <Compile Include="DAC\Liability.cs" />
     <Compile Include="DAC\Obligation.cs" />
-    <Compile Include="DAC\ObligationStatus.cs" />
-    <Compile Include="DAC\OrganizationTaxInfo.cs" />
-    <Compile Include="DAC\TaxHistoryReleased.cs" />
-    <Compile Include="DAC\VATPeriodFilter.cs" />
-    <Compile Include="DAC\VATRow.cs" />
+    <Compile Include="DAC\Payment.cs" />
     <Compile Include="Exceptions\VATAPIException.cs" />
     <Compile Include="Exceptions\VATAPIInvalidToken.cs" />
+    <Compile Include="PX.HMRC.VATMaint.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="Model\liability.cs" />
     <Compile Include="Model\liabilityRequest.cs" />
     <Compile Include="Model\obligation.cs" />
+    <Compile Include="Model\liabilityResponse.cs" />
+    <Compile Include="Model\paymentResponse.cs" />
     <Compile Include="Model\obligationResponse.cs" />
     <Compile Include="Model\obligationsRequest.cs" />
     <Compile Include="Model\payment.cs" />
@@ -79,36 +110,19 @@
     <Compile Include="Model\VATreturnRequest.cs" />
     <Compile Include="Model\VATreturnResponse.cs" />
     <Compile Include="Model\period.cs" />
+    <Compile Include="OAuthSettings.cs" />
+    <Compile Include="OAuthToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PX.HMRC.DecimalJsonConverter.cs" />
     <Compile Include="PX.HMRC.MTDApplicationProcessor.cs" />
     <Compile Include="PX.HMRC.VATApi.cs" />
-    <Compile Include="PX.HMRC.VATMaint.cs" />
+    <Compile Include="RuntimeServiceProvider.cs" />
+    <Compile Include="TraceLog.cs" />
     <Compile Include="VATApiType.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\NetTools\PX.Common\PX.Common.csproj">
-      <Project>{743dba41-6c26-4455-ad83-a6e5054c3573}</Project>
-      <Name>PX.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\NetTools\PX.Data\PX.Data.csproj">
-      <Project>{db1a48e4-4bb5-40c4-857b-04c83bbf5bec}</Project>
-      <Name>PX.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\NetTools\PX.OAuthClient\PX.OAuthClient.csproj">
-      <Project>{3b14c6ec-7042-4e68-a273-4c9cff508015}</Project>
-      <Name>PX.OAuthClient</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Pure\PX.Objects\PX.Objects.csproj">
-      <Project>{67cc92f7-08f5-48c0-ab98-046986881735}</Project>
-      <Name>PX.Objects</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

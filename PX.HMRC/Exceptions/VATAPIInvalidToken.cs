@@ -4,6 +4,7 @@ namespace PX.HMRC.Exceptions
 {
 	//  https://developer.service.hmrc.gov.uk/api-documentation/docs/reference-guide#http-status-codes
 	//  https://developer.service.hmrc.gov.uk/api-documentation/docs/authorisation/user-restricted-endpoints
+	[Serializable]
 	public class VATAPIInvalidToken : Exception
 	{
 		#region constants
@@ -36,6 +37,9 @@ namespace PX.HMRC.Exceptions
 			return message;
 		}
 
-
+		protected VATAPIInvalidToken(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext)
+		{
+			base.GetObjectData(serializationInfo, streamingContext);
+		}
 	}
 }

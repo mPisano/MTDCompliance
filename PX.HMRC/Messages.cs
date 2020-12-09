@@ -1,8 +1,5 @@
-﻿using PX.Common;
-
-namespace PX.HMRC
+﻿namespace PX.HMRC
 {
-    [PXLocalizable(Messages.Prefix)]
     public static class Messages
     {
         public const string Prefix = "HMRC Error";
@@ -11,7 +8,7 @@ namespace PX.HMRC
         public const string Open = "Open";
 
         public const string VatReturnWillBeSentToHMRC = "The VAT return will be sent to HMRC. Is the VAT return finalized?";
-        public const string PleaseAuthorize = "Please authorize.";
+        public const string PleaseAuthorize = "Please Authorize.";
 
         public const string FromDate = "From Date";
         public const string ToDate = "To Date";
@@ -30,19 +27,17 @@ namespace PX.HMRC
         public const string VATreturnIsAccepted = "The VAT return is accepted.";
 
         public const string vatDueSales = "VAT due on sales and other outputs";
-        public const string vatDueAcquisitions = "VAT due on acquisitions from other EC Member States.";
+        public const string vatDueAcquisitions = "For goods moved under the Northern Ireland protocol only."; //"VAT due on acquisitions from other EC Member States.";
         public const string totalVatDue = "Total VAT due";
         public const string vatReclaimedCurrPeriod = "VAT reclaimed on purchases and other inputs";
         public const string netVatDue = "The difference between Box 3 and Box 4";
         public const string totalValueSalesExVAT = "Total value of sales and all other outputs excluding any VAT";
         public const string totalValuePurchasesExVAT = "Total value of purchases and all other inputs excluding any VAT";
-        public const string totalValueGoodsSuppliedExVAT = "Total value of all supplies of goods and related costs, excluding any VAT, to other EC member states.";
-        public const string totalAcquisitionsExVAT = "Total value of acquisitions of goods and related costs excluding any VAT, from other EC member states.";
+        public const string totalValueGoodsSuppliedExVAT = "Total value of intra-community dispatches of goods and related costs (excluding VAT) from Northern Ireland to EU Member States." ;//"Total value of all supplies of goods and related costs, excluding any VAT, to other EC member states.";
+        public const string totalAcquisitionsExVAT = "Total value of intra-community acquisitions of goods and related costs (excluding VAT) made in Northern Ireland from EU Member States.";//"Total value of acquisitions of goods and related costs excluding any VAT, from other EC member states.";
 
         public const string ImpossibleToRefreshToken = "Impossible to refresh a token";
         public const string RefreshTokenIsInvalid = "Refresh Token is invalid";
         public const string RefreshTokenIsMissing = "Refresh Token is missing";
-
-
     }
 }
