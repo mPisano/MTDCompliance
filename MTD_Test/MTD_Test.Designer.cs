@@ -52,20 +52,20 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.bCalc = new System.Windows.Forms.Button();
             this.bSubmit = new System.Windows.Forms.Button();
+            this.bGetLiabilities = new System.Windows.Forms.Button();
+            this.bGetPayments = new System.Windows.Forms.Button();
+            this.toolTips = new System.Windows.Forms.ToolTip(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.bTestFraud = new System.Windows.Forms.Button();
             this.tbTotalAcquisitionsExVAT = new MTD_TEST.Controls.NumericTextBox();
             this.tbVatDueSales = new MTD_TEST.Controls.NumericTextBox();
-            this.tbatDueAcquisitions = new MTD_TEST.Controls.NumericTextBox();
+            this.tbDueAcquisitions = new MTD_TEST.Controls.NumericTextBox();
             this.tbTotalVatDue = new MTD_TEST.Controls.NumericTextBox();
             this.tbVatReclaimedCurrPeriod = new MTD_TEST.Controls.NumericTextBox();
             this.tbTotalValueGoodsSuppliedExVAT = new MTD_TEST.Controls.NumericTextBox();
             this.tbNetVatDue = new MTD_TEST.Controls.NumericTextBox();
             this.tbTotalValueSalesExVAT = new MTD_TEST.Controls.NumericTextBox();
             this.tbTotalValuePurchasesExVAT = new MTD_TEST.Controls.NumericTextBox();
-            this.bGetLiabilities = new System.Windows.Forms.Button();
-            this.bGetPayments = new System.Windows.Forms.Button();
-            this.toolTips = new System.Windows.Forms.ToolTip(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.bTestFraud = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -268,7 +268,7 @@
             this.panel1.Controls.Add(this.bGetReturns);
             this.panel1.Controls.Add(this.tbTotalAcquisitionsExVAT);
             this.panel1.Controls.Add(this.tbVatDueSales);
-            this.panel1.Controls.Add(this.tbatDueAcquisitions);
+            this.panel1.Controls.Add(this.tbDueAcquisitions);
             this.panel1.Controls.Add(this.tbTotalVatDue);
             this.panel1.Controls.Add(this.lbTotalValueGoodsSuppliedExVAT);
             this.panel1.Controls.Add(this.tbVatReclaimedCurrPeriod);
@@ -309,6 +309,45 @@
             this.bSubmit.UseVisualStyleBackColor = true;
             this.bSubmit.Click += new System.EventHandler(this.bSubmit_Click);
             // 
+            // bGetLiabilities
+            // 
+            this.bGetLiabilities.Location = new System.Drawing.Point(101, 29);
+            this.bGetLiabilities.Name = "bGetLiabilities";
+            this.bGetLiabilities.Size = new System.Drawing.Size(84, 23);
+            this.bGetLiabilities.TabIndex = 38;
+            this.bGetLiabilities.Text = "Liabilities";
+            this.bGetLiabilities.UseVisualStyleBackColor = true;
+            this.bGetLiabilities.Click += new System.EventHandler(this.bGetLiabilities_Click);
+            // 
+            // bGetPayments
+            // 
+            this.bGetPayments.Location = new System.Drawing.Point(191, 28);
+            this.bGetPayments.Name = "bGetPayments";
+            this.bGetPayments.Size = new System.Drawing.Size(84, 23);
+            this.bGetPayments.TabIndex = 39;
+            this.bGetPayments.Text = "Payments";
+            this.bGetPayments.UseVisualStyleBackColor = true;
+            this.bGetPayments.Click += new System.EventHandler(this.bGetPayments_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(305, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(57, 13);
+            this.label1.TabIndex = 40;
+            this.label1.Text = "Auth Code";
+            // 
+            // bTestFraud
+            // 
+            this.bTestFraud.Location = new System.Drawing.Point(770, 30);
+            this.bTestFraud.Name = "bTestFraud";
+            this.bTestFraud.Size = new System.Drawing.Size(72, 23);
+            this.bTestFraud.TabIndex = 42;
+            this.bTestFraud.Text = "Test Fraud";
+            this.bTestFraud.UseVisualStyleBackColor = true;
+            this.bTestFraud.Click += new System.EventHandler(this.bTestFraud_Click);
+            // 
             // tbTotalAcquisitionsExVAT
             // 
             this.tbTotalAcquisitionsExVAT.AllowNegative = true;
@@ -347,24 +386,24 @@
             this.tbVatDueSales.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tbVatDueSales.ZeroIsValid = true;
             // 
-            // tbatDueAcquisitions
+            // tbDueAcquisitions
             // 
-            this.tbatDueAcquisitions.AllowNegative = true;
-            this.tbatDueAcquisitions.Location = new System.Drawing.Point(188, 34);
-            this.tbatDueAcquisitions.Name = "tbatDueAcquisitions";
-            this.tbatDueAcquisitions.NumericPrecision = 9;
-            this.tbatDueAcquisitions.NumericScaleOnFocus = 2;
-            this.tbatDueAcquisitions.NumericScaleOnLostFocus = 2;
-            this.tbatDueAcquisitions.NumericValue = new decimal(new int[] {
+            this.tbDueAcquisitions.AllowNegative = true;
+            this.tbDueAcquisitions.Location = new System.Drawing.Point(188, 34);
+            this.tbDueAcquisitions.Name = "tbDueAcquisitions";
+            this.tbDueAcquisitions.NumericPrecision = 9;
+            this.tbDueAcquisitions.NumericScaleOnFocus = 2;
+            this.tbDueAcquisitions.NumericScaleOnLostFocus = 2;
+            this.tbDueAcquisitions.NumericValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.tbatDueAcquisitions.Size = new System.Drawing.Size(87, 20);
-            this.tbatDueAcquisitions.TabIndex = 16;
-            this.tbatDueAcquisitions.Text = "0.00";
-            this.tbatDueAcquisitions.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.tbatDueAcquisitions.ZeroIsValid = true;
+            this.tbDueAcquisitions.Size = new System.Drawing.Size(87, 20);
+            this.tbDueAcquisitions.TabIndex = 16;
+            this.tbDueAcquisitions.Text = "0.00";
+            this.tbDueAcquisitions.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbDueAcquisitions.ZeroIsValid = true;
             // 
             // tbTotalVatDue
             // 
@@ -482,45 +521,6 @@
             this.tbTotalValuePurchasesExVAT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tbTotalValuePurchasesExVAT.ZeroIsValid = true;
             // 
-            // bGetLiabilities
-            // 
-            this.bGetLiabilities.Location = new System.Drawing.Point(101, 29);
-            this.bGetLiabilities.Name = "bGetLiabilities";
-            this.bGetLiabilities.Size = new System.Drawing.Size(84, 23);
-            this.bGetLiabilities.TabIndex = 38;
-            this.bGetLiabilities.Text = "Liabilities";
-            this.bGetLiabilities.UseVisualStyleBackColor = true;
-            this.bGetLiabilities.Click += new System.EventHandler(this.bGetLiabilities_Click);
-            // 
-            // bGetPayments
-            // 
-            this.bGetPayments.Location = new System.Drawing.Point(191, 28);
-            this.bGetPayments.Name = "bGetPayments";
-            this.bGetPayments.Size = new System.Drawing.Size(84, 23);
-            this.bGetPayments.TabIndex = 39;
-            this.bGetPayments.Text = "Payments";
-            this.bGetPayments.UseVisualStyleBackColor = true;
-            this.bGetPayments.Click += new System.EventHandler(this.bGetPayments_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(305, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 13);
-            this.label1.TabIndex = 40;
-            this.label1.Text = "Auth Code";
-            // 
-            // bTestFraud
-            // 
-            this.bTestFraud.Location = new System.Drawing.Point(770, 30);
-            this.bTestFraud.Name = "bTestFraud";
-            this.bTestFraud.Size = new System.Drawing.Size(72, 23);
-            this.bTestFraud.TabIndex = 42;
-            this.bTestFraud.Text = "Test Fraud";
-            this.bTestFraud.UseVisualStyleBackColor = true;
-            this.bTestFraud.Click += new System.EventHandler(this.bTestFraud_Click);
-            // 
             // fMTD_TEST
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -564,7 +564,7 @@
         private System.Windows.Forms.Button bGetReturns;
         private System.Windows.Forms.TextBox tbPeriodKey;
         private Controls.NumericTextBox tbVatDueSales;
-        private Controls.NumericTextBox tbatDueAcquisitions;
+        private Controls.NumericTextBox tbDueAcquisitions;
         private Controls.NumericTextBox tbTotalVatDue;
         private Controls.NumericTextBox tbVatReclaimedCurrPeriod;
         private Controls.NumericTextBox tbNetVatDue;

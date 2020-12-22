@@ -17,15 +17,25 @@ namespace MTD_TEST
         public fMTD_TEST()
         {
             InitializeComponent();
-            this.toolTips.SetToolTip(this.lbVatDueSales, Messages.vatDueSales);
-            this.toolTips.SetToolTip(this.lbDueAcquisitions, Messages.vatDueAcquisitions);
-            this.toolTips.SetToolTip(this.lbTotalVatDue, Messages.totalVatDue);
-            this.toolTips.SetToolTip(this.lbVatReclaimedCurrPeriod, Messages.vatReclaimedCurrPeriod);
-            this.toolTips.SetToolTip(this.lbNetVatDue, Messages.netVatDue);
-            this.toolTips.SetToolTip(this.lbTotalValueSalesExVAT, Messages.totalValueSalesExVAT);
-            this.toolTips.SetToolTip(this.lbTotalValuePurchasesExVAT, Messages.totalValuePurchasesExVAT);
-            this.toolTips.SetToolTip(this.lbTotalValueGoodsSuppliedExVAT, Messages.totalValueGoodsSuppliedExVAT);
-            this.toolTips.SetToolTip(this.lbTotalAcquisitionsExVAT, Messages.totalAcquisitionsExVAT);
+            this.toolTips.SetToolTip(this.lbVatDueSales, Messages.vatDueSales_Notes);
+            this.toolTips.SetToolTip(this.lbDueAcquisitions, Messages.vatDueAcquisitions_Notes);
+            this.toolTips.SetToolTip(this.lbTotalVatDue, Messages.totalVatDue_Notes);
+            this.toolTips.SetToolTip(this.lbVatReclaimedCurrPeriod, Messages.vatReclaimedCurrPeriod_Notes);
+            this.toolTips.SetToolTip(this.lbNetVatDue, Messages.netVatDue_Notes);
+            this.toolTips.SetToolTip(this.lbTotalValueSalesExVAT, Messages.totalValueSalesExVAT_Notes);
+            this.toolTips.SetToolTip(this.lbTotalValuePurchasesExVAT, Messages.totalValuePurchasesExVAT_Notes);
+            this.toolTips.SetToolTip(this.lbTotalValueGoodsSuppliedExVAT, Messages.totalValueGoodsSuppliedExVAT_Notes);
+            this.toolTips.SetToolTip(this.lbTotalAcquisitionsExVAT, Messages.totalAcquisitionsExVAT_Notes);
+
+            this.toolTips.SetToolTip(this.tbVatDueSales, Messages.vatDueSales);
+            this.toolTips.SetToolTip(this.tbDueAcquisitions, Messages.vatDueAcquisitions);
+            this.toolTips.SetToolTip(this.tbTotalVatDue, Messages.totalVatDue);
+            this.toolTips.SetToolTip(this.tbVatReclaimedCurrPeriod, Messages.vatReclaimedCurrPeriod);
+            this.toolTips.SetToolTip(this.tbNetVatDue, Messages.netVatDue);
+            this.toolTips.SetToolTip(this.tbTotalValueSalesExVAT, Messages.totalValueSalesExVAT);
+            this.toolTips.SetToolTip(this.tbTotalValuePurchasesExVAT, Messages.totalValuePurchasesExVAT);
+            this.toolTips.SetToolTip(this.tbTotalValueGoodsSuppliedExVAT, Messages.totalValueGoodsSuppliedExVAT);
+            this.toolTips.SetToolTip(this.tbTotalAcquisitionsExVAT, Messages.totalAcquisitionsExVAT);
         }
 
         OAuthSettings oa = new OAuthSettings();
@@ -33,12 +43,19 @@ namespace MTD_TEST
         private void Form1_Load(object sender, EventArgs e)
         {
             //TODO Set Below for Test or Production
-            oa.ApplicationName = @"";
-            oa.ApplicationID = @"";
-            oa.ClientID = @"";
-            oa.ClientSecret = @"";
-            oa.VRN = "";
+            //oa.ApplicationName = @"";
+            //oa.ApplicationID = @"";
+            //oa.ClientID = @"";
+            //oa.ClientSecret = @"";
+            //oa.VRN = "";
 
+            oa.ApplicationName = @"Concordia Accounting";
+            oa.ApplicationID = @"423a61e2-efd3-4839-85c7-6d6e45450df8";
+            oa.ClientID = @"KTx42tZ1sE3poB5ZkIcCsDo2a0Ea";
+            oa.ClientSecret = @"b8087113-7653-409d-9716-665973b6b144";
+            oa.VRN = "647365904";
+            //  oa.UserID = @"443042101990";
+            //  oa.Password = @"Kwc4xfj8nZdv";
             vATMaint = new VATMaint(oa, GetFraudHeaders());
         }
 
@@ -116,7 +133,7 @@ namespace MTD_TEST
         {
             tbPeriodKey.Text = v.periodKey;
             tbVatDueSales.NumericValue = v.vatDueSales;
-            tbatDueAcquisitions.NumericValue = v.vatDueAcquisitions;
+            tbDueAcquisitions.NumericValue = v.vatDueAcquisitions;
             tbTotalVatDue.NumericValue = v.totalVatDue;
             tbVatReclaimedCurrPeriod.NumericValue = v.vatReclaimedCurrPeriod;
             tbNetVatDue.NumericValue = v.netVatDue;
@@ -130,7 +147,7 @@ namespace MTD_TEST
         {
             v.periodKey = tbPeriodKey.Text;
             v.vatDueSales = tbVatDueSales.DecimalValue;
-            v.vatDueAcquisitions = tbatDueAcquisitions.DecimalValue;
+            v.vatDueAcquisitions = tbDueAcquisitions.DecimalValue;
             v.totalVatDue = tbTotalVatDue.DecimalValue;
             v.vatReclaimedCurrPeriod = tbVatReclaimedCurrPeriod.DecimalValue;
             v.netVatDue = tbNetVatDue.DecimalValue;
