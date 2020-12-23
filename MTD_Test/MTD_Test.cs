@@ -42,12 +42,12 @@ namespace MTD_TEST
         VATMaint vATMaint;
         private void Form1_Load(object sender, EventArgs e)
         {
-            //TODO Set Below for Test or Production
-            //oa.ApplicationName = @"";
-            //oa.ApplicationID = @"";
-            //oa.ClientID = @"";
-            //oa.ClientSecret = @"";
-            //oa.VRN = "";
+            //TODO Set Below for Test or Production in .Config File
+            oa.ApplicationName = MTD_Test.Properties.Settings.Default.ApplicationName;
+            oa.ApplicationID = MTD_Test.Properties.Settings.Default.ApplicationID;
+            oa.ClientID = MTD_Test.Properties.Settings.Default.ClientID;
+            oa.ClientSecret = MTD_Test.Properties.Settings.Default.ClientSecret;
+            oa.VRN = MTD_Test.Properties.Settings.Default.VRN;
 
             vATMaint = new VATMaint(oa, GetFraudHeaders());
         }
