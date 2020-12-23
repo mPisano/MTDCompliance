@@ -49,13 +49,6 @@ namespace MTD_TEST
             //oa.ClientSecret = @"";
             //oa.VRN = "";
 
-            oa.ApplicationName = @"Concordia Accounting";
-            oa.ApplicationID = @"423a61e2-efd3-4839-85c7-6d6e45450df8";
-            oa.ClientID = @"KTx42tZ1sE3poB5ZkIcCsDo2a0Ea";
-            oa.ClientSecret = @"b8087113-7653-409d-9716-665973b6b144";
-            oa.VRN = "647365904";
-            //  oa.UserID = @"443042101990";
-            //  oa.Password = @"Kwc4xfj8nZdv";
             vATMaint = new VATMaint(oa, GetFraudHeaders());
         }
 

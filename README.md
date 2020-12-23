@@ -7,7 +7,7 @@ Making Tax Digital (MTD) is a UK government initiative that requires most UK tax
 Additional information is available from the HM Revenue and Customs website: https://www.gov.uk/government/publications/making-tax-digital/overview-of-making-tax-digital
 
 
-Thanks to Acumatica for their initial source, but This Fork is use without Acumatica.
+Thanks to Acumatica for their initial source, but this Fork is for use without Acumatica. 
 
 For true MTD you need to have "Digital links" meaning you need to open your tables with EF6 or SQL and sum your data,
 then you can use this code to submit and track them.
