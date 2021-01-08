@@ -204,15 +204,13 @@ namespace MTD_TEST
             Calc(vATMaint.VATreturn);
         }
 
-
-
         public Dictionary<string, string> GetFraudHeaders()
         {
             Dictionary<string, string> Headers = new Dictionary<string, string>();
 
             Headers.Add("Gov-Client-Connection-Method", @"DESKTOP_APP_DIRECT");
 
-            string DeviceId = GetMachineGuid();
+            string DeviceId = Uri.EscapeDataString(GetMachineGuid());
             Headers.Add("Gov-Client-Device-ID", DeviceId);
 
             string username = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
@@ -250,6 +248,8 @@ namespace MTD_TEST
             }
 
             Headers.Add("Gov-Client-Local-IPs", ipAddresses);
+            var ipts = Uri.EscapeDataString(DateTime.UtcNow.ToString("yyyy-MM-ddThh:mm:ss.sssZ"));
+            Headers.Add("Gov-Client-Local-IPs-Timestamp", ipts);
             Headers.Add("Gov-Client-MAC-Addresses", Uri.EscapeDataString(macAddresses));
 
             var w = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width.ToString();
@@ -257,28 +257,23 @@ namespace MTD_TEST
             var bbp = System.Windows.Forms.Screen.PrimaryScreen.BitsPerPixel.ToString();
             var screen = @"width=" + w + "&height=" + h + "&scaling-factor=1&colour-depth=" + bbp;
             Headers.Add("Gov-Client-Screens", screen);
-
             Headers.Add("Gov-Client-Window-Size", @"width=" + this.Width.ToString() + "&height=" + this.Height.ToString());
 
-            OperatingSystem os_info = System.Environment.OSVersion;
-            var os2 = System.Environment.MachineName;
-            var os3 = System.Environment.Version;
+            var os = "os-family=Windows";
+            var version = "os-version=" + Uri.EscapeDataString(System.Runtime.InteropServices.RuntimeInformation.OSDescription);
+            var mb = "device-manufacturer=" + Uri.EscapeDataString(Manufacturer);
+            var model = "device-model=" + Uri.EscapeDataString(Product);
+            Headers.Add("Gov-Client-User-Agent", os + "&" + version + "&" + mb + "&" + model);
 
-            var os = Uri.EscapeDataString(System.Runtime.InteropServices.RuntimeInformation.OSDescription);
-            var mb = Uri.EscapeDataString(Manufacturer);
-            var model = Uri.EscapeDataString(Product);
-            Headers.Add("Gov-Client-User-Agent", "Windows/" + os + " (" + mb + "/" + model + ")");
+            Headers.Add("Gov-Client-Multi-Factor", "");
 
-
-            Headers.Add("Gov-Client-Multi-Factor", ""); // Leave Blank and get HMRC Approval
-
-            var m = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+            var m = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileVersionInfo.ProductName;
             var v1 = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileVersionInfo.ProductMajorPart.ToString();
             var v2 = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileVersionInfo.ProductMinorPart.ToString();
 
-            Headers.Add("Gov-Vendor-Version", m+"=" + v1 + "." + v2);
-            Headers.Add("Gov-Vendor-License-IDs", ""); // Leave Blank and get HMRC Approval
-
+            Headers.Add("Gov-Vendor-Version", @"CifcVat=" + v1 + "." + v2);
+            Headers.Add("Gov-Vendor-License-IDs", "");
+            Headers.Add("Gov-Vendor-Product-Name", m);
             return Headers;
         }
 
