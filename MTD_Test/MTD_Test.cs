@@ -271,7 +271,7 @@ namespace MTD_TEST
             var v1 = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileVersionInfo.ProductMajorPart.ToString();
             var v2 = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileVersionInfo.ProductMinorPart.ToString();
 
-            Headers.Add("Gov-Vendor-Version", @"CifcVat=" + v1 + "." + v2);
+            Headers.Add("Gov-Vendor-Version", m + "=" + v1 + "." + v2);
             Headers.Add("Gov-Vendor-License-IDs", "");
             Headers.Add("Gov-Vendor-Product-Name", m);
             return Headers;
